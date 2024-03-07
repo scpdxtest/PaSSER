@@ -1,0 +1,203 @@
+{
+    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT ",
+    "version": "eosio::abi/1.2",
+    "types": [],
+    "structs": [
+        {
+            "name": "add_test",
+            "base": "",
+            "fields": [
+                {
+                    "name": "size",
+                    "type": "uint64"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "time_point_sec"
+                }
+            ]
+        },
+        {
+            "name": "addtest",
+            "base": "",
+            "fields": [
+                {
+                    "name": "creator",
+                    "type": "name"
+                },
+                {
+                    "name": "testid",
+                    "type": "name"
+                },
+                {
+                    "name": "description",
+                    "type": "string"
+                },
+                {
+                    "name": "results",
+                    "type": "float64[]"
+                }
+            ]
+        },
+        {
+            "name": "addtimetest",
+            "base": "",
+            "fields": [
+                {
+                    "name": "creator",
+                    "type": "name"
+                },
+                {
+                    "name": "testid",
+                    "type": "name"
+                },
+                {
+                    "name": "description",
+                    "type": "string"
+                },
+                {
+                    "name": "results",
+                    "type": "float64[]"
+                }
+            ]
+        },
+        {
+            "name": "clearall",
+            "base": "",
+            "fields": [
+                {
+                    "name": "user",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "clralltimes",
+            "base": "",
+            "fields": [
+                {
+                    "name": "user",
+                    "type": "name"
+                }
+            ]
+        },
+        {
+            "name": "tests",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "userid",
+                    "type": "name"
+                },
+                {
+                    "name": "testid",
+                    "type": "name"
+                },
+                {
+                    "name": "created_at",
+                    "type": "time_point_sec"
+                },
+                {
+                    "name": "results",
+                    "type": "float64[]"
+                },
+                {
+                    "name": "description",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "name": "timetests",
+            "base": "",
+            "fields": [
+                {
+                    "name": "id",
+                    "type": "uint64"
+                },
+                {
+                    "name": "userid",
+                    "type": "name"
+                },
+                {
+                    "name": "testid",
+                    "type": "name"
+                },
+                {
+                    "name": "created_at",
+                    "type": "time_point_sec"
+                },
+                {
+                    "name": "results",
+                    "type": "float64[]"
+                },
+                {
+                    "name": "description",
+                    "type": "string"
+                }
+            ]
+        }
+    ],
+    "actions": [
+        {
+            "name": "addtest",
+            "type": "addtest",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "addtimetest",
+            "type": "addtimetest",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "clearall",
+            "type": "clearall",
+            "ricardian_contract": ""
+        },
+        {
+            "name": "clralltimes",
+            "type": "clralltimes",
+            "ricardian_contract": ""
+        }
+    ],
+    "tables": [
+        {
+            "name": "testtable",
+            "type": "tests",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "timetable",
+            "type": "tests",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        },
+        {
+            "name": "timetests",
+            "type": "timetests",
+            "index_type": "i64",
+            "key_names": [],
+            "key_types": []
+        }
+    ],
+    "kv_tables": {},
+    "ricardian_clauses": [],
+    "variants": [],
+    "action_results": [
+        {
+            "name": "addtest",
+            "result_type": "add_test"
+        },
+        {
+            "name": "addtimetest",
+            "result_type": "add_test"
+        }
+    ]
+}

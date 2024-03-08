@@ -71,13 +71,13 @@ def calc_metrics (results:str, userID:str, testID:str, description:str)->str:
     raw_transaction = pyntelope.Transaction(actions=[action])
 
     print("Link transaction to the network")
-    net = pyntelope.Net(host = 'http://blockchain2.uni-plovdiv.net:8033')  
+    net = pyntelope.Net(host = '<blockchain address:port>')  
     # notice that pyntelope returns a new object instead of change in place
     linked_transaction = raw_transaction.link(net=net)
 
 
     print("Sign transaction")
-    key = "5HyZQrptLQnoTdjtwfMkPtgH18inm1vkSee8HBKEZHydhB79Tst"
+    key = "<llmtest blockchain account private key>"
     signed_transaction = linked_transaction.sign(key=key)
 
     print("Send")

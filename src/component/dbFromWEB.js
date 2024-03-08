@@ -16,15 +16,11 @@ const DBFromWEB = () => {
 
     const embeddings_open = new OllamaEmbeddings({
         model: "mistral", // default value
-        // baseUrl: "http://195.230.127.227:11434", // default value  
-        // baseUrl: "http://127.0.0.1:11434", // default value  
-        baseUrl: "http://93.152.201.115:11434", // default value  
+        baseUrl: "http://127.0.0.1:11434", // default value  
       });
 
     const mdl = new Ollama({
-        // baseUrl: "http://127.0.0.1:11434",
-        // baseUrl: "http://195.230.127.227:11434", // default value  
-        baseUrl: "http://93.152.201.115:11434",
+        baseUrl: "http://127.0.0.1:11434",
         model: "mistral",
     });  
 

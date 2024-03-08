@@ -14,7 +14,7 @@ const AddModel = () => {
     const [currentStatus, setCurrentStatus] = useState('');
 
     useEffect(() => {
-        const ol = localStorage.getItem("selectedOllama") || 'http://195.230.127.227:11434';
+        const ol = localStorage.getItem("selectedOllama") || 'http://127.0.0.1:11434';
         setSelectedOllama(ol);
         var matchFlag = false;
         bars.forEach(bar => {

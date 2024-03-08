@@ -1,0 +1,17 @@
+.dialog-right {
+    margin-left: '20px' !important;
+}
+
+.p-datatable.p-datatable-selectable .p-datatable-tbody > tr.p-selectable-row:not(.p-highlight):not(.p-datatable-emptymessage):hover{
+    background-color: rgba(163, 94, 90, 0.8)!important;
+}
+
+.p-highlight.p-datatable{
+    background-color: rgba(163, 94, 90, 0.8)!important;
+    color: 'black' !important;
+}
+
+.p-highlight {
+    background-color: #D2B48C !important; /* light brown */
+    color: #000000 !important; /* black */
+}

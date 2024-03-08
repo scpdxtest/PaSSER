@@ -1,0 +1,13 @@
+
+
+.p-dropdown-item.p-highlight {
+    background-color: rgb(82, 82, 225) !important; /* Replace with your preferred color */
+    color: #fff !important; /* Replace with your preferred text color */
+}
+
+.p-dropdown.p-component.p-inputwrapper {
+    border-color: rgb(82, 82, 225) !important;
+    border-block-color: rgb(82, 82, 225) !important;
+    scrollbar-shadow-color: rgb(82, 82, 225) !important;
+    border-top-color: rgb(82, 82, 225) !important;
+}

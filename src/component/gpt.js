@@ -13,7 +13,7 @@ const Gpt = () => {
     const [newMessage, setNewMessage] = useState('');
     const [dialogVisible, setDialogVisible] = useState(true);
     const [selectedModel, setSelectedModel] = useState(localStorage.getItem("selectedLLMModel") || 'mixtral');
-    const [selectedOllama, setSelectedOllama] = useState(localStorage.getItem("selectedOllama") || 'http://93.152.201.115:11434');
+    const [selectedOllama, setSelectedOllama] = useState(localStorage.getItem("selectedOllama") || 'http://127.0.0.1:11434');
     const [stat, setStat] = useState('');
     const [buffer, setBuffer] = useState([]);
     const [isAnswering, setIsAnswering] = useState(false);

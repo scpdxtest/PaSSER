@@ -1,0 +1,62 @@
+{
+    "passer": {
+        "Ollama": [
+            {
+                "name": "OllamaEndPoint1",
+                "url": "http://<address>:<port>"
+            },
+            {
+                "name": "OllamaEndPoint2",
+                "url": "http://<address>:<port>"
+            },
+            {
+                "name": "OllamaEndPoint3",
+                "url": "http://<address>:<port>"
+            }
+        ],
+        "Chroma": [
+            {
+                "name": "ChromaEndPoint1",
+                "url": "http://<address>:<port>"
+            },
+            {
+                "name": "ChromaEndPoint2",
+                "url": "http://<address>:<port>"
+            }
+        ],
+        "PytonScore": "<address:port>/metrics",
+        "PythonTimes": "<address:port>/metrics",
+        "BCEndPoints": [
+            {
+                "name": "BCEndPoint1",
+                "url": "http://<address>:<port>"
+            },
+            {
+                "name": "BCEndPoint2",
+                "url": "http://<address>:<port>"
+            },
+            {
+                "name": "BCEndPoint3",
+                "url": "http://<address>:<port>"
+            }
+        ],
+        "BCid": "<Antelope blockchain id>",
+        "IPFSEndPoints": [
+            {
+                "name": "IPFSEndPoint1",
+                "host": "<address>",
+                "port": "<port>"
+            },
+            {
+                "name": "IPFSEndPoint2",
+                "host": "<address>",
+                "port": "<port>"
+            },
+            {
+                "name": "IPFSEndPoint3",
+                "host": "<address>",
+                "port": "<port>"
+            }
+        ]
+    }
+}

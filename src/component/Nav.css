@@ -1,0 +1,48 @@
+.red-icon {
+    color: red;
+}
+
+.green-icon {
+    color: green;
+}
+
+/* CSS */
+.pi.pi-fw.pi-eye {
+    color: red;
+}
+
+.pi.pi-fw.pi-plus {
+    color: green;
+}
+
+.pi.pi-fw.pi-book {
+    color: blue;
+}
+
+.pi.pi-fw.pi-list {
+    color: brown;
+}
+
+.pi.pi-fw.pi-comment {
+    color: green;
+}
+
+.pi.pi-fw.pi-sliders-h {
+    color: blue;
+}
+
+.blue-text {
+    color: blue;
+}
+
+.app-container {
+    display: flex;
+}
+
+.menu-container {
+    width: 400px; /* adjust as needed */
+}
+
+.content-container {
+    flex-grow: 1;
+}

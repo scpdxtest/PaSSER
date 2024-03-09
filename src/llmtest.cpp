@@ -178,6 +178,3 @@ ACTION clralltimes(name user) {
   }
 
 };
-
-// cleos -u http://blockchain2.uni-plovdiv.net:8033 set contract llmtest ./ llmtest.wasm llmtest.abi
-// eosio-cpp --abigen ./src/llmtest.cpp -o llmtest.wasm

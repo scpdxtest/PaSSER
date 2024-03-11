@@ -56,7 +56,7 @@ const Navigation = () => {
                     }
                 },
                 {
-                    label: 'RAG QA with LLM', icon: <span style={{color: 'green'}} className='pi pi-fw pi-comment'></span>, command: () => {
+                    label: 'RAG Q&A with LLM', icon: <span style={{color: 'green'}} className='pi pi-fw pi-comment'></span>, command: () => {
                     window.location.href='./#/chatfromdb'
                     }
                 }
@@ -65,12 +65,12 @@ const Navigation = () => {
         {label: 'Tests', icon: <img src={testingIcon} alt="About" width="20" height="20"/>, 
             items: [
                 {
-                    label: 'QA Dataset', icon: <span style={{color: 'green'}} className='pi pi-fw pi-align-center'></span>, command: () => {
+                    label: 'Q&A Dataset', icon: <span style={{color: 'green'}} className='pi pi-fw pi-align-center'></span>, command: () => {
                     window.location.href='./#/qatest'
                     }
                 },
                 {
-                    label: 'RAG QA score test', icon: <span style={{color: 'green'}} className='pi pi-fw pi-exclamation-circle'></span>, command: () => {
+                    label: 'RAG Q&A score test', icon: <span style={{color: 'green'}} className='pi pi-fw pi-exclamation-circle'></span>, command: () => {
                     window.location.href='./#/testRAGbat'
                     }
                 },
@@ -80,7 +80,7 @@ const Navigation = () => {
                     }
                 },
                 {
-                    label: 'QA Time LLM tests', icon: <span style={{color: 'green'}} className='pi pi-fw pi-clock'></span>, command: () => {
+                    label: 'Q&A Time LLM tests', icon: <span style={{color: 'green'}} className='pi pi-fw pi-clock'></span>, command: () => {
                     window.location.href='./#/testtimebat'
                     }
                 },

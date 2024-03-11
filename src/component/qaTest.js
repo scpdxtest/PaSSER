@@ -17,15 +17,6 @@ const QATest = () => {
 
     // const prompt = 'Generate precise questions from specific statements. Each statement will be presented to you one at a time, and your challenge is to formulate the exact question to which this statement responds. Your question should be directly related to the statement. Aim to construct your question in such a manner that it does not suggest the statement itself as the answer, and where appropriate, direct your question to elicit detailed information on factual content.'
 
-    const embeddings_open = new OllamaEmbeddings({
-        model: 'mistral', 
-        baseUrl: selectedOllama
-      });
-      const mdl = new Ollama({
-        baseUrl: selectedOllama,
-        model: 'mistral'
-    });  
-
     const [fileContent, setFileContent] = useState('');
     const [selectedChromaDB, setSelectedChromaDB] = useState('');
     const [selectedOllama, setSelectedOllama] = useState(null);
@@ -35,6 +26,15 @@ const QATest = () => {
     const [completed, setCompleted] = useState(0);
 
     const myLoop = async () => {
+        const embeddings_open = new OllamaEmbeddings({
+            model: 'mistral', 
+            baseUrl: selectedOllama
+          });
+          const mdl = new Ollama({
+            baseUrl: selectedOllama,
+            model: 'mistral'
+        });  
+    
         var myDict = [];
         setIsTesting(true);
         const paragraphs = fileContent.split('\n');

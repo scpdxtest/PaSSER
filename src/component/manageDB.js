@@ -9,11 +9,6 @@ import { ConfirmDialog } from 'primereact/confirmdialog';
 
 const ManageDB = () => {
 
-    const embeddings_open = new OllamaEmbeddings({
-        model: "mistral", 
-        baseUrl: selectedOllama
-      });
-
     const [collections, setCollections] = useState([]);
     const [dbInfo, setDbInfo] = useState('');
     const [selectedChromaDB, setSelectedChromaDB] = useState('');
@@ -64,6 +59,10 @@ const ManageDB = () => {
     };
 
     const onRowDoubleClick = async (e) => {
+        const embeddings_open = new OllamaEmbeddings({
+            model: "mistral", 
+            baseUrl: selectedOllama
+        });
         const collection = e.data;
         const client = new ChromaClient({path: selectedChromaDB});
         let collection2 = await client.getCollection({name: e.data.name});

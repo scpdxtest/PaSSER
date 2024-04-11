@@ -1,3 +1,9 @@
+# PaSSER is an web application designed for implementing and testing Retrieval-Augmented Generation (RAG) models. It offers a user-friendly interface for adaptive testing across various scenarios, integrating large language models (LLMs) like Mistral:7b, Llama2:7b, and Orca2:7b.
+
+## PaSSER provides a comprehensive set of standard Natural Language Processing (NLP) metrics, facilitating thorough evaluation of model performance.
+
+### The platform fosters collaboration and transparency within the research community, empowering users to contribute to the advancement of language model research and development.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

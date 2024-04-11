@@ -16,7 +16,7 @@ const TestWharf = () => {
         appName: "passer",
         chains: [
             {
-            id: configuration.BCid, 
+            id: configuration.passer.BCid, 
             url: localStorage.getItem("bcEndpoint"),
             },
         ],

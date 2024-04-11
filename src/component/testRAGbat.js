@@ -14,6 +14,7 @@ import axios from 'axios';
 import { FilterMatchMode } from 'primereact/api';
 import './testRAGbat.css';
 import configuration from './configuration.json';
+import { ScoreThresholdRetriever } from "langchain/retrievers/score_threshold";
 
 const TestRAGbat = () => {
     const [selectedChromaDB, setSelectedChromaDB] = useState('');
@@ -31,6 +32,10 @@ const TestRAGbat = () => {
     const [isTesting, setIsTesting] = useState(false);
     const [total, setTotal] = useState(0);
     const [completed, setCompleted] = useState(0);
+    const [symScore, setSymScore] = useState(0);
+    const [k, setK] = useState(0);
+    const [kInc, setKInc] = useState(0);
+    const [results, setResults] = useState('');
 
     const embeddings_open = new OllamaEmbeddings({
         model: selectedModel, 
@@ -58,6 +63,9 @@ const TestRAGbat = () => {
     };
 
     useEffect(() => {
+        setSymScore(Number(localStorage.getItem("symScore")) || 0.9);
+        setK(Number(localStorage.getItem("k")) || 100);
+        setKInc(Number(localStorage.getItem("kInc")) || 2);
         const ch = localStorage.getItem("selectedChromaDB") || 'http://127.0.0.1:8000';
         setSelectedChromaDB(ch);
         const ol = localStorage.getItem("selectedOllama") || 'http://127.0.0.1:11434';
@@ -65,6 +73,7 @@ const TestRAGbat = () => {
         const mdl = localStorage.getItem("selectedLLMModel") || 'mistral';
         setSelectedModel(mdl);
         listCollections(ch);
+        console.log("Python", configuration.passer.PythonScore);
     }, []);
 
     const rowClass = (rowData) => {
@@ -97,8 +106,10 @@ const TestRAGbat = () => {
     const startTest = async () => {
         setIsTesting(true);
         setTotal(QAJSON.length);
+        setResults('');
+        var retriever;
         for (let i = 0; i < QAJSON.length; i++) {
-            console.log("QAJSON[i]", QAJSON[i], i);
+            console.log("QAJSON[i]", QAJSON[i], i, selectedDB);
             const question = QAJSON[i].question;
             const answer = QAJSON[i].answer;
 
@@ -106,15 +117,32 @@ const TestRAGbat = () => {
                 baseUrl: selectedOllama,
                 model: selectedModel 
             });  
-    
+            const embeddings_open1 = new OllamaEmbeddings({
+                model: selectedModel, 
+                baseUrl: selectedOllama 
+              });
+            
             const vectorStore1 = await Chroma.fromExistingCollection(
-                embeddings_open,
+                embeddings_open1,
                 {
                     collectionName: selectedDB,
                     url: selectedChromaDB 
                 });
 
-            const retriever = vectorStore1.asRetriever();
+            if (localStorage.getItem("retriever") === 'Normal') {
+                retriever = vectorStore1.asRetriever();
+                console.log("retriever NORMAL");
+            } else {
+                retriever = ScoreThresholdRetriever.fromVectorStore(vectorStore1, {
+                    minSimilarityScore: Number(localStorage.getItem("symScore")) || 0.9, // Finds results with at least this similarity score
+                    maxK: Number(localStorage.getItem("k")) || 100, // The maximum K value to use. Use it based to your chunk size to make sure you don't run out of tokens
+                    kIncrement: Number(localStorage.getItem("kInc")) || 2, // How much to increase K by each time. It'll fetch N results, then N + kIncrement, then N + kIncrement * 2, etc.
+                });
+                console.log("retriever SCORE");
+            }
+
+            console.log("retriever", retriever);
+
             const chain = new RetrievalQAChain({
                 combineDocumentsChain: loadQAStuffChain(mdl1),
                 retriever,
@@ -136,8 +164,8 @@ const TestRAGbat = () => {
                 description: 'question: ' + question.replace(/[^\x00-\x7F]/g, "") + ', answer: ' + res.text.replace(/[^\x00-\x7F]/g, "")
             }
             console.log("to back ----> ", metrics.description);
-            await axios.post(configuration.PytonScore + '/metrics', metrics);
-
+            await axios.post(configuration.passer.PythonScore, metrics);
+            setResults(prevResults => prevResults + (i+1).toString() + '-> Question: ' + question + '\n' + 'Reference: ' + QAJSON[i].answer + '\n' + 'Answer: ' + res.text + '\n\n');
             setCompleted(i + 1);
         }
         setIsTesting(false);
@@ -147,6 +175,13 @@ const TestRAGbat = () => {
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
         name: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
     });
+
+    const retrieverColor = localStorage.getItem("retriever") === "Normal" ? 'green' : 'red';
+    const endRef = React.useRef(null);
+
+    React.useEffect(() => {
+        endRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [results]);
 
     return (
         <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between'}}>
@@ -164,6 +199,20 @@ const TestRAGbat = () => {
             {dialogVisible &&
             <div style={{ width: '90%', marginLeft: '20px'}}>
                 <h3>Input Parameters</h3>
+                <span style={{ fontSize: '1.2em', 
+                                fontWeight: 'bold', 
+                                color: retrieverColor, 
+                                // border: '1px solid #000', 
+                                // borderRadius: '20%', 
+                                // padding: '10px',
+                                marginBottom: '10px' }}>  
+                    {localStorage.getItem("retriever")}
+                    {localStorage.getItem("retriever") === "Score" ? (
+                        ` -> Similarity score = ${localStorage.getItem("symScore") || '0.9'} /
+                        k = ${localStorage.getItem("k") || '100'} / 
+                        kInc = ${localStorage.getItem("kInc") || '2' }`
+                    ) : null}                
+                </span>
                 <br></br>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '45%' }}>
@@ -180,6 +229,12 @@ const TestRAGbat = () => {
                 {isTesting && <ProgressBar                             
                             value={((completed / total) * 100).toFixed(2)} 
                             style={{ width: '90%', marginTop: '10px' }} />}
+                <div style={{ marginTop: '5px', backgroundColor: '#000', color: '#fff', padding: '10px', borderRadius: '5px', width: '90%', overflow: 'auto' }}>
+                    <pre style={{ fontFamily: 'monospace', whiteSpace: 'pre-wrap', height: '300px', overflowY: 'auto', textAlign: 'left' }}>
+                        {results}
+                        <div ref={endRef} />
+                    </pre>                
+                </div>
             </div>}
         </div>
     );

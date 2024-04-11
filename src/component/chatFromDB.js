@@ -13,6 +13,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import { BufferMemory } from "langchain/memory";
 import { ConversationalRetrievalQAChain } from "langchain/chains";
 import { FilterMatchMode } from 'primereact/api';
+import { ScoreThresholdRetriever } from "langchain/retrievers/score_threshold";
 
 const ChatFromDB = () => {
     const [selectedChromaDB, setSelectedChromaDB] = useState('');
@@ -25,6 +26,9 @@ const ChatFromDB = () => {
     const [selectedDB, setSelectedDB] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [tempreture, setTempreture] = useState(localStorage.getItem("chatTempreture") || '0.2');
+    const [symScore, setSymScore] = useState(0);
+    const [k, setK] = useState(0);
+    const [kInc, setKInc] = useState(0);
 
     const [filters, setFilters] = useState({
         global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -63,6 +67,9 @@ const ChatFromDB = () => {
     };
 
     useEffect(() => {
+        setSymScore(Number(localStorage.getItem("symScore")) || 0.9);
+        setK(Number(localStorage.getItem("k")) || 100);
+        setKInc(Number(localStorage.getItem("kInc")) || 2);
         const ch = localStorage.getItem("selectedChromaDB") || 'http://127.0.0.1:8000';
         setSelectedChromaDB(ch);
         const ol = localStorage.getItem("selectedOllama") || 'http://127.0.0.1:11434';
@@ -86,8 +93,17 @@ const ChatFromDB = () => {
                 collectionName: e.data.name,
                 url: selectedChromaDB,
             });
-        const retriever = vectorStore1.asRetriever();
-    
+
+        var retriever;
+        if (localStorage.getItem("retriever") === '0') {
+            retriever = vectorStore1.asRetriever();
+        } else {
+            retriever = ScoreThresholdRetriever.fromVectorStore(vectorStore1, {
+                minSimilarityScore: 0.9, // Finds results with at least this similarity score
+                maxK: 100, // The maximum K value to use. Use it based to your chunk size to make sure you don't run out of tokens
+                kIncrement: 2, // How much to increase K by each time. It'll fetch N results, then N + kIncrement, then N + kIncrement * 2, etc.
+            });
+        }    
         console.log(`Double clicked on collection with ID: ${collection.id}`);
     };
 
@@ -136,10 +152,20 @@ const ChatFromDB = () => {
             {
                 collectionName: selectedDB,
                 url: selectedChromaDB 
+        });
+
+        var retriever;
+        if (localStorage.getItem("retriever") === 'Normal') {
+            retriever = vectorStore1.asRetriever();
+        } else {
+            retriever = ScoreThresholdRetriever.fromVectorStore(vectorStore1, {
+                minSimilarityScore: Number(localStorage.getItem("symScore")) || 0.9, // Finds results with at least this similarity score
+                maxK: Number(localStorage.getItem("k")) || 100, // The maximum K value to use. Use it based to your chunk size to make sure you don't run out of tokens
+                kIncrement: Number(localStorage.getItem("kInc")) || 2, // How much to increase K by each time. It'll fetch N results, then N + kIncrement, then N + kIncrement * 2, etc.
             });
-
-        const retriever = vectorStore1.asRetriever();
-
+        }    
+        console.log("retriever", retriever);
+    
         const chain = ConversationalRetrievalQAChain.fromLLM(
             mdl,
             retriever,
@@ -169,10 +195,15 @@ const ChatFromDB = () => {
         setIsSubmitting(false);
     };
 
+    const retrieverColor = localStorage.getItem("retriever") === "Normal" ? 'green' : 'red';
+
     return (
         <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between'}}>
             <div style={{ width: '40%'}}>
-                <h3>SelectDB (temperature={tempreture})</h3>
+                <h3>
+                    <span>SelectDB (temperature={tempreture})</span>
+                    {/* <span style={{ color: retrieverColor }}>  {localStorage.getItem("retriever")}</span> */}
+                </h3>
                 <DataTable style={{width: '90%'}} value={collections} onRowDoubleClick={onRowDoubleClick}
                     onRowSelect={onRowSelect} selectionMode="single" selection={selectedDB}
                     rowClassName={rowClass} filters={filters} filterDisplay="row"
@@ -185,6 +216,20 @@ const ChatFromDB = () => {
         {dialogVisible &&
             <div style={{ width: '90%', marginLeft: '20px'}}>
                 <Card title='Chat with private LLM over selected DB' style={{ width: '95%' }}>
+                <span style={{ fontSize: '1.2em', 
+                                fontWeight: 'bold', 
+                                color: retrieverColor, 
+                                // border: '1px solid #000', 
+                                // borderRadius: '20%', 
+                                // padding: '10px',
+                                marginBottom: '10px' }}>  
+                    {localStorage.getItem("retriever")}
+                    {localStorage.getItem("retriever") === "Score" ? (
+                        ` -> Similarity score = ${localStorage.getItem("symScore") || '0.9'} /
+                        k = ${localStorage.getItem("k") || '100'} / 
+                        kInc = ${localStorage.getItem("kInc") || '2' }`
+                    ) : null}                
+                </span>
                     {messages.map((message, index) => (
                         <div key={index}>
                             <pre style={{ textOverflow: 'ellipsis', whiteSpace: 'pre-wrap', wordWrap: 'break-word', textAlign: 'left' }}>

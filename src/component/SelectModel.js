@@ -4,6 +4,8 @@ import { Dropdown } from "primereact/dropdown";
 import './SelectModel.css';
 import { InputText } from "primereact/inputtext";
 import configuration from './configuration.json';
+import { SelectButton } from 'primereact/selectbutton';
+import { set } from "cohere-ai/core/schemas";
 
 const SelectModel = () => {
     const [availableModels, setAvailableModels] = useState([]);
@@ -12,11 +14,22 @@ const SelectModel = () => {
     const [availableCromas, setAvailableCromas] = useState(configuration.passer.Chroma.map(item => item.url))
     const [selectedOllama, setSelectedOllama] = useState(null);
     const [temperature, setTemperature] = useState(0.2);
+    const retOptions = ['Normal', 'Score'];
+    const [retriever, setRetriever] = useState();
 
     const availableOllamas = configuration.passer.Ollama.map(item => item.url)
+    const [errorMessage1, setErrorMessage1] = useState('');
+    const [errorMessage2, setErrorMessage2] = useState('');
+    const [errorMessage3, setErrorMessage3] = useState('');
+    const [symScore, setSymScore] = useState(0);
+    const [k, setK] = useState(0);
+    const [kInc, setKInc] = useState(0);
 
     useEffect(() => {
-
+        setSymScore(Number(localStorage.getItem("symScore")) || 0.9);
+        setK(Number(localStorage.getItem("k")) || 100);
+        setKInc(Number(localStorage.getItem("kInc")) || 2);
+        setRetriever(localStorage.getItem("retriever"));        
         console.log('json', configuration.passer.Ollama.map(item => item.url));
         const temp = localStorage.getItem("chatTempreture") || '0.2';
         setTemperature(parseFloat(temp));
@@ -77,6 +90,84 @@ const SelectModel = () => {
                         placeholder="Chat Tempreture" 
                     />
                 </div>
+                <div style={{ marginLeft: '50px' }}>
+                    <h3>Retriever</h3>
+                    <div className="card flex justify-content-center">
+                        <SelectButton value={retriever} onChange={(e) => 
+                            {
+                                setRetriever(e.value); 
+                                localStorage.setItem("retriever", e.value);
+                                console.log('retriever', localStorage.getItem("retriever"));
+                            }} options={retOptions} />
+                    </div>
+                    {retriever === 'Score' ? (
+                        <div style={{ width: '100%', border: '1px solid black', marginTop: '10px' }}>
+                            <div className="p-field p-grid">
+                                <label htmlFor="input1" className="p-col-fixed" style={{width:'100px'}}>Symilarity score</label>
+                                <div className="p-col">
+                                    <InputText id="input1" type="number" min="0" max="1" step="0.0001" placeholder="Symilarity score" value={symScore}
+                                        onChange={(e) => {
+                                            const value = parseFloat(e.target.value);
+                                            setSymScore(value);
+                                            localStorage.setItem("symScore", value.toString());
+                                        }}
+                                        onBlur={(e) => {
+                                            const value = parseFloat(e.target.value);
+                                            if (value < 0 || value > 1 || (value * 10000) % 1 !== 0) {
+                                                setErrorMessage1('Similarity score must be between 0 and 1 and have a maximum of 4 decimal places');
+                                            } else {
+                                                setErrorMessage1('');
+                                            }
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                            <div className="p-field p-grid">
+                                <label htmlFor="input2" className="p-col-fixed" style={{width:'100px'}}>k</label>
+                                <div className="p-col">
+                                <InputText id="input2" type="number" step="1" placeholder="k" value={k}
+                                        onChange={(e) => {
+                                            const value = parseFloat(e.target.value);
+                                            setK(value);
+                                            localStorage.setItem("k", value.toString());
+                                        }}
+                                        onBlur={(e) => {
+                                            const value = parseFloat(e.target.value);
+                                            if (value <= 0 || value % 1 !== 0) {
+                                                setErrorMessage2('k must be greater than 0 and without decimals');
+                                            } else {
+                                                setErrorMessage2('');
+                                            }
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                            <div className="p-field p-grid">
+                                <label htmlFor="input3" className="p-col-fixed" style={{width:'100px'}}>k incremental</label>
+                                <div className="p-col">
+                                <InputText id="input2" type="number" step="1" placeholder="k incremental" value={kInc}
+                                        onChange={(e) => {
+                                            const value = parseFloat(e.target.value);
+                                            setKInc(value);
+                                            localStorage.setItem("kInc", value.toString());
+                                        }}
+                                        onBlur={(e) => {
+                                            const value = parseFloat(e.target.value);
+                                            if (value <= 0 || value > k || value % 1 !== 0) {
+                                                setErrorMessage3('k incremental must be greater than 0, less than k and without decimals');
+                                            } else {
+                                                setErrorMessage3('');
+                                            }
+                                        }}
+                                    />
+                                </div>
+                            </div>                        
+                            {errorMessage1 && <div style={{ color: 'red' }}>{errorMessage1}</div>}
+                            {errorMessage2 && <div style={{ color: 'red' }}>{errorMessage2}</div>}
+                            {errorMessage3 && <div style={{ color: 'red' }}>{errorMessage3}</div>}
+                        </div>
+                    ) : null}                
+                </div>                
             </div>
         </div>
     );

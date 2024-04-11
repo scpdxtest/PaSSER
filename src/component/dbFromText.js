@@ -19,6 +19,9 @@ const DBFromText = () => {
     const [selectedOllama, setSelectedOllama] = useState(null);
     const [selectedModel, setSelectedModel] = useState(null);
     const [duration, setDuration] = useState(0);
+    const [chunkSize, setChunkSize] = useState(1024);
+    const [tempretures, setTempretures] = useState(0.2);
+    const [overlapping, setOverlapping] = useState(50);
 
     const embeddings_open = new OllamaEmbeddings({
         model: selectedModel, 
@@ -70,8 +73,8 @@ const DBFromText = () => {
     const fetchData = async (textx) => {
         const ids = textx.map((_, index) => ({ id: index + 1, keywords: k_words }));
         const textSplitter = new RecursiveCharacterTextSplitter({
-            chunkSize: 500,
-            chunkOverlap: 100,
+            chunkSize: chunkSize,
+            chunkOverlap: overlapping,
         });
 
         const documents = textx.map((string, index) => ({
@@ -122,10 +125,29 @@ const DBFromText = () => {
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                     <InputText style={{width: '800px'}} value={collectionName} onChange={(e) => setCollectionName(e.target.value)} />
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <label>Chunk</label>
+                        <InputText style={{width: '80px', marginLeft: '10px'}} value={chunkSize} onChange={(e) => setChunkSize(e.target.value)} />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <label>Ovr</label>
+                        <InputText style={{width: '80px', marginLeft: '10px'}} value={overlapping} onChange={(e) => setOverlapping(e.target.value)} />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <label>Tempr</label>
+                        <InputText style={{width: '80px', marginLeft: '10px'}} value={tempretures} onChange={(e) => setTempretures(e.target.value)} />
+                    </div>
                     {uploading ? <ProgressSpinner style={{ width: '50px', height: '50px', marginLeft: '10px' }} /> : null}      
                     {dbCreated ? <span style={{color: 'green', marginLeft: '10px'}}><b>DB Created succesfuly in {formatDurationToMinSec(duration)}</b></span> : null}
                 </div>
             </div>
+            {/* <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                    <InputText style={{width: '800px'}} value={collectionName} onChange={(e) => setCollectionName(e.target.value)} />
+                    {uploading ? <ProgressSpinner style={{ width: '50px', height: '50px', marginLeft: '10px' }} /> : null}      
+                    {dbCreated ? <span style={{color: 'green', marginLeft: '10px'}}><b>DB Created succesfuly in {formatDurationToMinSec(duration)}</b></span> : null}
+                </div>
+            </div> */}
 
             <h3>Upload Files</h3>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

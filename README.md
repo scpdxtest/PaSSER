@@ -12,6 +12,8 @@ Popchev, I., Radeva, I., Doukovska, L., Dimitrova, M. A Web Application for Data
 
 Popchev, I., Radeva, I., Dimitrova, M. Towards Blockchain Wallets Classification and Implementation. Proceedings of the IEEE International Conference Automatics and Informatics – ICAI’23, 5-7 October 2023, Varna, Bulgaria, IEEE Xplore, 2023, DOI:10.1109/ICAI58806.2023.10339101, 346-351, (Scopus) https://ieeexplore.ieee.org/document/10339101
 
+Radeva, I., Popchev, I., Dimitrova, M. Similarity Thresholds in Retrieval-Augmented Generation. Proceedings of the 12th IEEE International Conference on Intelligent Systems - IS’24, 29-31 August 2024, Varna, Bulgaria, IEEE Xplore, 2024, ISBN:979-8-3503-5098-2, ISSN:2832-4145, DOI:10.1109/IS61756.2024.10705214, 1-7.https://ieeexplore.ieee.org/document/10705214
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

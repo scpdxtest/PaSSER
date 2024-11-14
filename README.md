@@ -8,10 +8,6 @@ The platform fosters collaboration and transparency within the research communit
 
 Radeva, I., Popchev, I., Doukovska, L., Dimitrova, M. Web Application for Retrieval-Augmented Generation: Implementation and Testing. Electronics, 13, 7, MDPI, Basel, Switzerland, 2024, ISSN:2079-9292, DOI:10.3390/electronics13071361, 1-31. SJR (Scopus):0.63, JCR-IF (Web of Science):2.9, Q2 (Web of Science) https://www.mdpi.com/2079-9292/13/7/1361
 
-Popchev, I., Radeva, I., Doukovska, L., Dimitrova, M. A Web Application for Data Exchange Blockchain Platform. Proceedings of the 8th IEEE International Conference on Big Data, Knowledge and Control Systems Engineering - BdKCSE'23, 2–3 November 2023, Sofia, Bulgaria, IEEE Xplore, 2023, DOI:10.1109/BdKCSE59280.2023.10339770, 1-7, (Scopus) https://ieeexplore.ieee.org/document/10339770
-
-Popchev, I., Radeva, I., Dimitrova, M. Towards Blockchain Wallets Classification and Implementation. Proceedings of the IEEE International Conference Automatics and Informatics – ICAI’23, 5-7 October 2023, Varna, Bulgaria, IEEE Xplore, 2023, DOI:10.1109/ICAI58806.2023.10339101, 346-351, (Scopus) https://ieeexplore.ieee.org/document/10339101
-
 Radeva, I., Popchev, I., Dimitrova, M. Similarity Thresholds in Retrieval-Augmented Generation. Proceedings of the 12th IEEE International Conference on Intelligent Systems - IS’24, 29-31 August 2024, Varna, Bulgaria, IEEE Xplore, 2024, ISBN:979-8-3503-5098-2, ISSN:2832-4145, DOI:10.1109/IS61756.2024.10705214, 1-7.https://ieeexplore.ieee.org/document/10705214
 
 # Getting Started with Create React App

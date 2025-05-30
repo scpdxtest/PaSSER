@@ -6,6 +6,7 @@ This repository contains the complete implementation and evaluation materials fo
 # Repository Structure
 
 Enhanced CPS and T-CPS/
+
 ├── algorithms/
 │   ├── cps_implementation.py          // Core CPS computation algorithm
 │   ├── tcps_implementation.py         // T-CPS with variance penalty
@@ -67,16 +68,23 @@ CPS Framework
 T-CPS Extension
 
 •	Adds coefficient of variation-based penalty term
+
 •	Reward factor (α = 0.1) for stable configurations
+
 •	Penalty factor (β = 0.05) for high variability
+
 •	Formula: T-CPS = μ × (1 + α × (1 - CV)) - β × CV²
 
 Data Description
 
 •	Dataset Size: 369 question-answer pairs from agricultural domain
+
 •	Source: Climate-smart Agriculture Sourcebook
+
 •	Models Tested: Mistral 7B, DeepSeek 8B, Llama 3.1 8B, Granite 3.2 8B
+
 •	Threshold Range: 0.50 to 0.95 (increments of 0.05)
+
 •	Total Tests: 16,280 evaluations
 
 Reproducibility
@@ -84,9 +92,13 @@ Reproducibility
 All experiments can be reproduced using the provided scripts and data. The repository includes:
 
 •	Complete raw evaluation data
+
 •	Statistical analysis code
+
 •	Visualization generation scripts
+
 •	Unit tests for algorithm validation
+
 
 # Citation
 [Add your paper citation here when published]

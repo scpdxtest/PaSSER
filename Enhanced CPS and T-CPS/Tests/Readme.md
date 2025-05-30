@@ -59,7 +59,9 @@ DeepSeek 8B	0.90	1.01%	0.79%	2/10
 CPS Framework
 
 •	Integrates 11 evaluation metrics across 4 dimensions
+
 •	Weighted aggregation with polarity-aware normalization
+
 •	Categories: Lexical overlap (30%), Semantic similarity (25%), Fluency & accuracy (25%), Language modeling (20%)
 
 T-CPS Extension

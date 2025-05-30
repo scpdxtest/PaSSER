@@ -1,0 +1,83 @@
+T-CPS Model Analysis
+==================================================
+
+Model: Llama 3.1 8B
+  Optimal threshold: 0.90
+  Max T-CPS: 0.5500
+  Mean T-CPS: 0.5381
+  Std T-CPS: 0.0144
+
+Model: Granite 3.2 8B
+  Optimal threshold: 0.95
+  Max T-CPS: 0.5626
+  Mean T-CPS: 0.5603
+  Std T-CPS: 0.0022
+
+Model: DeepSeek 8B
+  Optimal threshold: 0.65
+  Max T-CPS: 0.4960
+  Mean T-CPS: 0.4939
+  Std T-CPS: 0.0016
+
+Model: Mistral 7B
+  Optimal threshold: 0.95
+  Max T-CPS: 0.5917
+  Mean T-CPS: 0.5747
+  Std T-CPS: 0.0073
+
+
+==================================================
+STATISTICAL SIGNIFICANCE ANALYSIS
+==================================================
+
+Paired t-tests comparing CPS scores vs baseline threshold 0.01
+Significance levels: *** p<0.001, ** p<0.01, * p<0.05, ns = not significant
+
+Model: Llama 3.1 8B
+  Threshold 0.50: Δ=-0.0029, t=-0.673, p=0.5016 ns, d=-0.035
+  Threshold 0.55: Δ=0.0050, t=1.267, p=0.2060 ns, d=0.066
+  Threshold 0.60: Δ=-0.0248, t=-3.876, p=0.0001 ***, d=-0.202
+  Threshold 0.65: Δ=-0.0016, t=-0.428, p=0.6688 ns, d=-0.022
+  Threshold 0.70: Δ=0.0051, t=1.030, p=0.3035 ns, d=0.054
+  Threshold 0.75: Δ=0.0013, t=0.329, p=0.7421 ns, d=0.017
+  Threshold 0.80: Δ=0.0043, t=0.923, p=0.3566 ns, d=0.048
+  Threshold 0.85: Δ=0.0033, t=0.709, p=0.4789 ns, d=0.037
+  Threshold 0.90: Δ=0.0077, t=2.001, p=0.0462 *, d=0.104
+  Threshold 0.95: Δ=-0.0258, t=-4.623, p=0.0000 ***, d=-0.241
+
+Model: Granite 3.2 8B
+  Threshold 0.50: Δ=0.0024, t=1.141, p=0.2548 ns, d=0.059
+  Threshold 0.55: Δ=0.0032, t=1.679, p=0.0940 ns, d=0.087
+  Threshold 0.60: Δ=0.0028, t=1.253, p=0.2111 ns, d=0.065
+  Threshold 0.65: Δ=0.0047, t=2.213, p=0.0275 *, d=0.115
+  Threshold 0.70: Δ=0.0060, t=2.823, p=0.0050 **, d=0.147
+  Threshold 0.75: Δ=0.0056, t=2.731, p=0.0066 **, d=0.142
+  Threshold 0.80: Δ=0.0060, t=3.073, p=0.0023 **, d=0.160
+  Threshold 0.85: Δ=0.0052, t=2.617, p=0.0092 **, d=0.136
+  Threshold 0.90: Δ=0.0047, t=2.370, p=0.0183 *, d=0.123
+  Threshold 0.95: Δ=0.0064, t=3.098, p=0.0021 **, d=0.161
+
+Model: DeepSeek 8B
+  Threshold 0.50: Δ=0.0003, t=0.204, p=0.8384 ns, d=0.011
+  Threshold 0.55: Δ=0.0015, t=1.241, p=0.2153 ns, d=0.065
+  Threshold 0.60: Δ=0.0010, t=0.642, p=0.5213 ns, d=0.033
+  Threshold 0.65: Δ=0.0035, t=2.710, p=0.0070 **, d=0.141
+  Threshold 0.70: Δ=0.0012, t=0.855, p=0.3932 ns, d=0.044
+  Threshold 0.75: Δ=0.0025, t=1.909, p=0.0570 ns, d=0.099
+  Threshold 0.80: Δ=0.0017, t=1.249, p=0.2123 ns, d=0.065
+  Threshold 0.85: Δ=0.0001, t=0.050, p=0.9601 ns, d=0.003
+  Threshold 0.90: Δ=0.0046, t=2.292, p=0.0225 *, d=0.119
+  Threshold 0.95: Δ=0.0037, t=1.517, p=0.1301 ns, d=0.079
+
+Model: Mistral 7B
+  Threshold 0.50: Δ=0.0031, t=0.662, p=0.5086 ns, d=0.034
+  Threshold 0.55: Δ=0.0091, t=2.056, p=0.0405 *, d=0.107
+  Threshold 0.60: Δ=0.0101, t=2.274, p=0.0236 *, d=0.118
+  Threshold 0.65: Δ=0.0017, t=0.375, p=0.7082 ns, d=0.020
+  Threshold 0.70: Δ=0.0110, t=2.470, p=0.0140 *, d=0.129
+  Threshold 0.75: Δ=0.0104, t=2.317, p=0.0210 *, d=0.121
+  Threshold 0.80: Δ=0.0044, t=0.973, p=0.3311 ns, d=0.051
+  Threshold 0.85: Δ=0.0049, t=1.085, p=0.2786 ns, d=0.056
+  Threshold 0.90: Δ=0.0124, t=2.738, p=0.0065 **, d=0.143
+  Threshold 0.95: Δ=0.0239, t=4.679, p=0.0000 ***, d=0.244
+

@@ -14,23 +14,23 @@ Enhanced CPS and T-CPS/
 ├── datasets/
 │   ├── qa_pairs_369.json            // Complete question-answer dataset
 │   ├── agricultural_corpus/          // Source knowledge base
-│   └── data_preprocessing.py         # Dataset preparation scripts
+│   └── data_preprocessing.py         // Dataset preparation scripts
 ├── results/
-│   ├── mistral_7b_results.csv       # Complete Mistral 7B analysis
-│   ├── granite_32_8b_results.csv    # Complete Granite 3.2 8B analysis
-│   ├── llama_31_8b_results.csv      # Complete Llama 3.1 8B analysis
-│   ├── deepseek_8b_results.csv      # Complete DeepSeek 8B analysis
-│   └── summary_statistics.json      # Cross-model comparison data
+│   ├── mistral_7b_results.csv       // Complete Mistral 7B analysis
+│   ├── granite_32_8b_results.csv    // Complete Granite 3.2 8B analysis
+│   ├── llama_31_8b_results.csv      // Complete Llama 3.1 8B analysis
+│   ├── deepseek_8b_results.csv      // Complete DeepSeek 8B analysis
+│   └── summary_statistics.json      // Cross-model comparison data
 ├── analysis/
-│   ├── threshold_analysis.py        # Threshold-by-threshold evaluation
-│   ├── sensitivity_patterns.py      # Model sensitivity characterization
-│   ├── cps_tcps_comparison.py       # CPS vs T-CPS relationship analysis
-│   └── visualization_scripts.py     # Figure generation code
+│   ├── threshold_analysis.py        // Threshold-by-threshold evaluation
+│   ├── sensitivity_patterns.py      // Model sensitivity characterization
+│   ├── cps_tcps_comparison.py       // CPS vs T-CPS relationship analysis
+│   └── visualization_scripts.py     // Figure generation code
 ├── tests/
-│   ├── unit_tests/                  # Algorithm validation tests
-│   ├── reproducibility_check.py     # Full pipeline verification
-│   └── test_data/                   # Sample data for testing
-└── README.md                        # This file
+│   ├── unit_tests/                  // Algorithm validation tests
+│   ├── reproducibility_check.py     // Full pipeline verification
+│   └── test_data/                   // Sample data for testing
+└── README.md                        // This file
 
 # Quick Start
 

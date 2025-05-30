@@ -1,4 +1,4 @@
-Enhanced CPS and T-CPS for RAG Threshold Analysis
+# Enhanced CPS and T-CPS for RAG Threshold Analysis
 
 # Overview
 This repository contains the complete implementation and evaluation materials for similarity threshold tuning in Retrieval-Augmented Generation (RAG) systems across four open-source language models.
@@ -7,13 +7,13 @@ This repository contains the complete implementation and evaluation materials fo
 
 Enhanced CPS and T-CPS/
 ├── algorithms/
-│   ├── cps_implementation.py          # Core CPS computation algorithm
-│   ├── tcps_implementation.py         # T-CPS with variance penalty
-│   ├── metric_normalization.py       # Metric preprocessing and scaling
-│   └── statistical_validation.py     # T-tests and significance analysis
+│   ├── cps_implementation.py          // Core CPS computation algorithm
+│   ├── tcps_implementation.py         // T-CPS with variance penalty
+│   ├── metric_normalization.py       // Metric preprocessing and scaling
+│   └── statistical_validation.py     // T-tests and significance analysis
 ├── datasets/
-│   ├── qa_pairs_369.json            # Complete question-answer dataset
-│   ├── agricultural_corpus/          # Source knowledge base
+│   ├── qa_pairs_369.json            // Complete question-answer dataset
+│   ├── agricultural_corpus/          // Source knowledge base
 │   └── data_preprocessing.py         # Dataset preparation scripts
 ├── results/
 │   ├── mistral_7b_results.csv       # Complete Mistral 7B analysis
